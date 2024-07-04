@@ -1,0 +1,32 @@
+#	Bu sat?r, Spring Boot uygulamas?n?n ad?n? belirler.
+#	spring.application.name özelli?i, uygulaman?n ad?n? belirtir ve
+#	bu ad, genellikle servis ke?if ve izleme araçlar? taraf?ndan kullan?l?r.
+spring.application.name=discovery-server
+
+#   8761 portu üzerinde çal???r. Bu, Eureka Server??n varsay?lan portudur.
+#	Taray?c?dan veya di?er uygulamalardan Eureka Server?a eri?mek için http://localhost:8761 URL?i kullan?l?r.
+server.port=8761
+
+#                                       Özet
+#
+#           Alttaki iki yap?land?rma, Eureka Server??n ba??ms?z (stand-alone) bir modda çal??mas?n? sa?lar.
+#           Yani, ba?ka bir Eureka Server?a kay?t olmadan ve ba?ka bir Eureka Server?dan servis kay?tlar?n? almadan çal???r.
+#           Bu, genellikle tek bir Eureka Server örne?i kurarken kullan?l?r.
+
+#	Self-registration?? kapatma: Bu ayar, Eureka Server??n kendisini ba?ka bir Eureka Server?a kaydetmesini engeller.
+#	Stand-alone çal??ma: Bu, Eureka Server??n ba??ms?z olarak çal??aca?? anlam?na gelir ve ba?ka bir Eureka Server ile ileti?im kurmaz.
+#	Bu nedenle, eureka.client.register-with-eureka özelli?ini false olarak ayarlad?k.
+eureka.client.register-with-eureka=false
+
+#	Kay?t defteri fetch?ini kapatma: Bu ayar, Eureka Server??n di?er servislerin kay?tlar?n? almak için ba?ka bir Eureka Server?a ba?lanmas?n? engeller.
+#	Stand-alone çal??ma: Bu, Eureka Server??n kendi kay?t defterini kullanaca?? anlam?na gelir ve ba?ka bir Eureka Server?dan veri almaz.
+#	Bu nedenle, eureka.client.fetch-registry özelli?ini false olarak ayarlad?k.
+eureka.client.fetch-registry=false
+
+#	Bu konfigürasyon sat?r?, Eureka Client??n servis ke?fi ve kay?t i?lemleri için hangi Eureka Server?a ba?lanaca??n? tan?mlar.
+#	Bu ayar, servislerin Eureka Server?a kaydolmas?n? ve di?er servisleri ke?fetmesini sa?lar.
+#	(localhost ifadesi, geli?tirme ortam?nda Eureka Server??n yerel makinede çal??t???n? belirtir.
+#	Üretim ortam?nda, bu ayar uygun URL veya IP adresi ile de?i?tirilmelidir.)
+#	Bu nedenle, eureka.client.service-url.defaultZone özelli?ini http://localhost:8761/eureka olarak ayarlad?k.
+#   Optional
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
