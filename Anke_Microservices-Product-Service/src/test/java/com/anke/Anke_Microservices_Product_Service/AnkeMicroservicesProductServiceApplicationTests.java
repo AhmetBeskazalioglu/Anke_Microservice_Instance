@@ -1,13 +1,14 @@
 package com.anke.Anke_Microservices_Product_Service;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AnkeMicroservicesProductServiceApplicationTests {
+public class AnkeMicroservicesProductServiceApplicationTests {
 
 	@Test
-	void contextLoads() {
+    public void contextLoads() {
 	}
 
 }
