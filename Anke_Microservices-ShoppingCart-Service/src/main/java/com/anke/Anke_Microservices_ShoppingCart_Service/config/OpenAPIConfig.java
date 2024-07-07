@@ -1,4 +1,4 @@
-package com.anke.Anke_Microservices_Product_Service.config;
+package com.anke.Anke_Microservices_ShoppingCart_Service.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -22,8 +22,8 @@ public class OpenAPIConfig {
 
         License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
-        Info info = new Info().title("Product API").version("1.0").contact(contact)
-                .description("Documentation Product API v1.0")
+        Info info = new Info().title("Shopping Cart API").version("1.0").contact(contact)
+                .description("Documentation Shopping Cart API v1.0")
                 // .termsOfService("https://github.com/Ctere1/")
                 .license(mitLicense);
 
