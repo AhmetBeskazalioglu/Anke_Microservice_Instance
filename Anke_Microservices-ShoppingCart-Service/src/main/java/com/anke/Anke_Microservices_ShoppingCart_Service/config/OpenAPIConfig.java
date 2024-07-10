@@ -24,7 +24,7 @@ public class OpenAPIConfig {
 
         Info info = new Info().title("Shopping Cart API").version("1.0").contact(contact)
                 .description("Documentation Shopping Cart API v1.0")
-                // .termsOfService("https://github.com/Ctere1/")
+                // .termsOfService("https://github.com/AhmetBeskazalioglu/")
                 .license(mitLicense);
 
         final String securitySchemeName = "bearerAuth";

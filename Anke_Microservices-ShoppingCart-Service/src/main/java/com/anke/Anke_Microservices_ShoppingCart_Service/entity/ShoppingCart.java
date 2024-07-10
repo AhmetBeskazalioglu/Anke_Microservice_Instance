@@ -10,9 +10,11 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(unique = true)
-    private String shoppingCartName;
+    private Long productId;
+    private String productName;
+    private Double productPrice;
+    private String productDescription;
+    private String productCategory;
 
     public long getId() {
         return id;
@@ -22,23 +24,43 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public String getShoppingCartName() {
-        return shoppingCartName;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setShoppingCartName(String shoppingCartName) {
-        this.shoppingCartName = shoppingCartName;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    @ManyToMany
-    @JoinTable(name = "shopping_cart_product", joinColumns = @JoinColumn(name = "shopping_cart_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-    Set<Product> products;
+    public Double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
 }

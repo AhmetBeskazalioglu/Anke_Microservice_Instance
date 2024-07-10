@@ -1,15 +1,7 @@
-package com.anke.Anke_Microservices_ShoppingCart_Service.entity;
+package com.anke.Anke_Microservices_ShoppingCart_Service.feignclient;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-
-import java.util.Set;
-
-@Entity
 public class Product {
 
-	@Id
 	private long id;
 	private String name;
 	private double price;

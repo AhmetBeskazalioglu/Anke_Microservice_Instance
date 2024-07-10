@@ -1,114 +1,38 @@
 package com.anke.Anke_Microservices_ShoppingCart_Service.service;
 
-import com.anke.Anke_Microservices_ShoppingCart_Service.entity.Product;
+import com.anke.Anke_Microservices_ShoppingCart_Service.feignclient.Product;
 import com.anke.Anke_Microservices_ShoppingCart_Service.entity.ShoppingCart;
-import com.anke.Anke_Microservices_ShoppingCart_Service.repository.ProductRepository;
+import com.anke.Anke_Microservices_ShoppingCart_Service.feignclient.ProductClient;
 import com.anke.Anke_Microservices_ShoppingCart_Service.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.*;
 
 @Service
 public class ShoppingCartService {
 
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
+    private ProductClient productClient;
 
     @Autowired
-    ProductRepository productRepository;
+    private ShoppingCartRepository shoppingCartRepository;
 
-    @Autowired
-    RestTemplate restTemplate;
+    public ResponseEntity<String> addProductToCart(Long productId) {
 
-    public ResponseEntity<ShoppingCart> createCart(String name) {
+        // Get product by id
+        Product product = productClient.getProductById(productId);
+
+        // Add product to cart
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setShoppingCartName(name);
-        return ResponseEntity.ok().body(shoppingCartRepository.save(shoppingCart));
+        shoppingCart.setProductId(product.getId());
+        shoppingCart.setProductName(product.getName());
+        shoppingCart.setProductPrice(product.getPrice());
+        shoppingCartRepository.save(shoppingCart);
+
+        return ResponseEntity.ok("Product added to cart successfully");
     }
 
-    public ResponseEntity<ShoppingCart> addProducts(Long shoppingCartId, List<Product> products) {
-
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId)
-                .orElseThrow(() -> new RuntimeException("Shopping cart not found"));
-
-        products.forEach(product -> productRepository.saveAndFlush(product));
-        Set<Product> newProducts = new HashSet<>(products);
-
-        Set<Product> existingProducts = shoppingCart.getProducts();
-        if (existingProducts == null) {
-            existingProducts = new HashSet<>();
-        }
-        existingProducts.addAll(newProducts);
-
-        shoppingCart.setProducts(existingProducts);
-
-        return ResponseEntity.ok().body(shoppingCartRepository.save(shoppingCart));
-    }
-
-    public ResponseEntity<ShoppingCart> removeProduct(Long shoppingCartId, Long productId) {
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId)
-                .orElseThrow(() -> new RuntimeException("Shopping cart not found"));
-
-        Set<Product> existingProducts = shoppingCart.getProducts();
-        if (existingProducts == null) {
-            return ResponseEntity.ok().body(shoppingCart);
-        }
-
-        existingProducts.removeIf(product -> product.getId() == (productId));
-
-        shoppingCart.setProducts(existingProducts);
-
-        return ResponseEntity.ok().body(shoppingCartRepository.save(shoppingCart));
-    }
-
-    public ResponseEntity<Map<String, String>> getShoppingCartPrice(Long shoppingCartId) {
-        Map<String, String> response = new HashMap<>();
-
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId)
-                .orElseThrow(() -> new RuntimeException("Shopping cart not found"));
-
-        int totalPrice = shoppingCart
-                .getProducts().stream().map(product -> restTemplate
-                        .getForObject("http://PRODUCT-SERVICE/api/product/" + product.getId(), HashMap.class))
-                .mapToInt(productResponse -> (int) productResponse.get("price")).sum();
-        response.put("total_price", Double.toString(totalPrice));
-
-        return ResponseEntity.ok().body(response);
-    }
-
-    public ResponseEntity<ShoppingCart> getCartByShoppingCartName(String shoppingCartName) {
-        ShoppingCart shoppingCart = shoppingCartRepository.findByShoppingCartName(shoppingCartName)
-                .orElseThrow(() -> new RuntimeException("Shopping cart not found"));
-
-        return ResponseEntity.ok(shoppingCart);
-    }
-
-    public ResponseEntity<ShoppingCart> getCartById(Long shoppingCartId) {
-        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId)
-                .orElseThrow(() -> new RuntimeException("Shopping cart not found"));
-
-        return ResponseEntity.ok(shoppingCart);
-    }
-
-    public ResponseEntity<List<ShoppingCart>> getAllCarts() {
-        List<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
-        return ResponseEntity.ok(shoppingCarts);
-    }
-
-    public ResponseEntity<String> deleteCartById(Long shoppingCartId) {
-        if (shoppingCartRepository.existsById(shoppingCartId)) {
-            shoppingCartRepository.deleteById(shoppingCartId);
-            return ResponseEntity.ok("Shopping Cart deleted successfully");
-        } else {
-            throw new RuntimeException("Shopping Cart not found in DB");
-        }
-    }
-
-    public ResponseEntity<String> deleteAllCarts() {
-        shoppingCartRepository.deleteAll();
-        return ResponseEntity.ok("All Shopping Carts deleted successfully");
+    public ShoppingCart getCartById(Long cartId) {
+        return shoppingCartRepository.findById(cartId).orElse(null);
     }
 }
