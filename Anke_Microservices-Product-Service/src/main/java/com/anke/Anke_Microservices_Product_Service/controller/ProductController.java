@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("api/product")
 @Tag(name = "product", description = "Product Endpoints")
 public class ProductController {
 
@@ -19,6 +19,11 @@ public class ProductController {
     public ResponseEntity<Product> yeniUrunEkle(@RequestBody Product product) {
         //jdbc insert into product
         return ResponseEntity.ok().body(productService.createProduct(product));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Product> urunGetir(@PathVariable("id") Long productId) {
+        return ResponseEntity.ok().body(productService.getProductById(productId));
     }
 
 }

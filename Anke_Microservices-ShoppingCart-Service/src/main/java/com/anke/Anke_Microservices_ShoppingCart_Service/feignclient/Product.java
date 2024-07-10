@@ -12,12 +12,9 @@ public class Product {
 	@Id
 	private long id;
 	private String name;
-	private long price;
+	private double price;
 	private String description;
 	private String category;
-
-	@ManyToMany(mappedBy = "products")
-	private Set<ShoppingCart> shoppingCarts;
 
 	public long getId() {
 		return id;
@@ -35,7 +32,7 @@ public class Product {
 		this.name = name;
 	}
 	
-	public long getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
