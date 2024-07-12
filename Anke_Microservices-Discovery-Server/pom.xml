@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.anke</groupId>
-	<artifactId>Anke_Microservices-Discovey-Server</artifactId>
+	<artifactId>Anke_Microservices-Discovery-Server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Anke_Microservices-Discovey-Server</name>

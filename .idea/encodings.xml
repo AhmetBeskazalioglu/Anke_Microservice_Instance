@@ -3,7 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Anke_Microservices-API-Gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Anke_Microservices-Config-Server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Anke_Microservices-Discovey-Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Anke_Microservices-Discovery-Server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Anke_Microservices-Product-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Anke_Microservices-ShoppingCart-Service/src/main/java" charset="UTF-8" />
   </component>
 </project>
