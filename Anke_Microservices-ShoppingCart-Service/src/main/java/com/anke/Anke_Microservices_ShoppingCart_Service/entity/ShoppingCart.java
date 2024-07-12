@@ -1,66 +1,46 @@
 package com.anke.Anke_Microservices_ShoppingCart_Service.entity;
 
-import jakarta.persistence.*;
-
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 public class ShoppingCart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private Long productId;
-    private String productName;
-    private Double productPrice;
-    private String productDescription;
-    private String productCategory;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public long getId() {
+    private String shoppincartName;
+
+    @ManyToMany
+    @JoinTable(
+            name = "shopping_cart_product",
+            joinColumns = @JoinColumn(name = "shopping_cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    Set<Product> products;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public String getShoppincartName() {
+        return shoppincartName;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setShoppincartName(String shoppincartName) {
+        this.shoppincartName = shoppincartName;
     }
 
-    public String getProductName() {
-        return productName;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }

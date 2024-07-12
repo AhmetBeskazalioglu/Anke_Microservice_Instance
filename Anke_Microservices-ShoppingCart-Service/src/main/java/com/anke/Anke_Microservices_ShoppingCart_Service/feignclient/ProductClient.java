@@ -1,5 +1,6 @@
 package com.anke.Anke_Microservices_ShoppingCart_Service.feignclient;
 
+import com.anke.Anke_Microservices_ShoppingCart_Service.entity.Product;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

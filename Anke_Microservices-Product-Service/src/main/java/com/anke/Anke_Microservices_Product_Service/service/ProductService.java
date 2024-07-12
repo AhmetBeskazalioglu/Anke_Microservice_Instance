@@ -3,7 +3,10 @@ package com.anke.Anke_Microservices_Product_Service.service;
 import com.anke.Anke_Microservices_Product_Service.entity.Product;
 import com.anke.Anke_Microservices_Product_Service.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -23,6 +26,10 @@ public class ProductService {
     public Product getProductById(Long productId) {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found in DB"));
+    }
+
+    public ResponseEntity<List<Product>> getAll() {
+        return ResponseEntity.ok().body(productRepository.findAll());
     }
 
 }

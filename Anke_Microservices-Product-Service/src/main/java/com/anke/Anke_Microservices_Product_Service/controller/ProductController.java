@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/product")
 @Tag(name = "product", description = "Product Endpoints")
@@ -25,5 +27,11 @@ public class ProductController {
     public ResponseEntity<Product> urunGetir(@PathVariable("id") Long productId) {
         return ResponseEntity.ok().body(productService.getProductById(productId));
     }
+
+    @GetMapping
+    public ResponseEntity<List<Product>> getAll() {
+        return productService.getAll();
+    }
+
 
 }

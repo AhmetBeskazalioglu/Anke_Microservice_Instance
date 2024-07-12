@@ -2,50 +2,49 @@ package com.anke.Anke_Microservices_ShoppingCart_Service.feignclient;
 
 public class Product {
 
-	private long id;
-	private String name;
-	private double price;
-	private String description;
-	private String category;
+    private Long id;
+    private String name;
+    private Double price;
 
-	public long getId() {
-		return id;
-	}
+    public Product() {
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Product(Long id, String name, Double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public double getPrice() {
-		return price;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setPrice(long price) {
-		this.price = price;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public Double getPrice() {
+        return price;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
