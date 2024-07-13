@@ -14,37 +14,6 @@ import java.util.Map;
 @RequestMapping("api/shopping-cart")
 public class ShoppingCartController {
 
-        /*private ShoppingCartService shoppingCartService;
-
-        @Autowired
-        public ShoppingCartController(ShoppingCartService shoppingCartService) {
-                this.shoppingCartService = shoppingCartService;
-        }
-
-    @PostMapping("/add")
-    public ResponseEntity<String> addProductToCart(@RequestParam Long productId) {
-        shoppingCartService.addProductToCart(productId);
-        return ResponseEntity.ok("Product added to cart successfully");
-    }
-
-    @GetMapping("/{cartId}")
-    public ResponseEntity<ShoppingCart> getCartById(@PathVariable Long cartId) {
-        return ResponseEntity.ok(shoppingCartService.getCartById(cartId));
-    }*/
-
-    /*@Autowired
-    ShoppingCartService shoppingCartService;
-
-    @PostMapping("/create")
-    public ResponseEntity<ShoppingCart> create(@RequestParam String name) {
-        return shoppingCartService.create(name);
-    }
-
-    @PostMapping("/{shoppingCartId}/add-products")
-    public ResponseEntity<ShoppingCart> addProducts(@PathVariable Long shoppingCartId, @RequestBody List<Product> products) {
-        return shoppingCartService.addProducts(shoppingCartId, products);
-    }*/
-
     @Autowired ShoppingCartService shoppingCartService;
 
     @PostMapping
@@ -63,5 +32,4 @@ public class ShoppingCartController {
             @PathVariable("id") Long shoppingCartId) {
         return shoppingCartService.getShoppingCartPrice(shoppingCartId);
     }
-
 }
